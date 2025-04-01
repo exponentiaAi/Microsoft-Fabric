@@ -1,0 +1,32 @@
+name: Provision Fabric Data Platform
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.bicep'
+      - '.github/workflows/main.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: '{"clientId":"8d9aea47-f467-4f80-9415-060fb5d980f9","clientSecret":"9fadf330-ef16-4995-bb78-9c3d35477421","subscriptionId":"224a3c65-8eb9-4654-8ba7-ea005536e634","tenantId":"fb33e7e1-6a98-4d5a-bd25-f47acf95078a"}'
+    
+    - name: Deploy Bicep Template
+      uses: azure/arm-deploy@v1
+      with:
+        scope: subscription
+        region: centralindia
+        subscriptionId: 224a3c65-8eb9-4654-8ba7-ea005536e634
+        template: iac/bicep/main.bicep
+        failOnStdErr: false
