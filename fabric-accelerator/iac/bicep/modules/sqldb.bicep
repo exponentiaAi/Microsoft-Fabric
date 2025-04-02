@@ -134,7 +134,7 @@ resource sqlserver_audit 'Microsoft.Sql/servers/auditingSettings@2022-02-01-prev
 //Role Assignment
 @description('This is the built-in Storage Blob Reader role. See https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#contributor')
 resource readerRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: 'Azure subscription 1'
+  scope: subscription()
   name: '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1'
 }
 
