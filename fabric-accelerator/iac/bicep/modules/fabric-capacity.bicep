@@ -1,9 +1,9 @@
 // Parameters
 @description('The name of the Fabric Capacity.')
-param fabric_name string = 'fabricf2'
+param fabric_name string
 
 @description('The Azure Region to deploy the resources into.')
-param location string = 'centralindia' // Central India
+param location string = resourceGroup().location
 
 @description('The SKU name of the Fabric Capacity.')
 @allowed([
