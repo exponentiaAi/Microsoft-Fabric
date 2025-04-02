@@ -36,12 +36,11 @@ var fabric_uniquename = '${fabric_name}${suffix}'
 resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
   name: toLower(fabric_uniquename)
   location: location
-  properties: {  
-  sku: {
-    name: skuName
-    tier: skuTier
-  }
   properties: {
+    sku: {
+      name: skuName
+      tier: skuTier
+    }
     administration: {
       members: [adminUsers]
     }
