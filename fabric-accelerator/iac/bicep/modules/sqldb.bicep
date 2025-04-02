@@ -18,26 +18,26 @@ param sme_tag string = 'SME'
 
 @description('AD server admin user name')
 @secure()
-param ad_admin_username string = powerbipro@exponentia.ai'
+param ad_admin_username string = 'powerbipro@exponentia.ai'
 
 @description('SID (object ID) of the server administrator')
 @secure()
 param ad_admin_sid string = 'a2ee70c0-b5d8-4496-b6ed-2fc0b824155e'
 
 @description('Database SKU name, e.g P3. For valid values, run this CLI az sql db list-editions -l australiaeast -o table')
-param database_sku_name string ='GP_S_Gen5_1'
+param database_sku_name string = 'GP_S_Gen5_1'
 
 @description('Time in minutes after which database is automatically paused')
 param auto_pause_duration int = 60
 
 @description('Flag to indicate whether to enable audit logging of SQL Server')
-param enable_audit bool = false
+param enable_audit bool = true
 
 @description('Resource name of audit storage account')
-param audit_storage_name string = 'fabricgen2datalake'
+param audit_storage_name string
 
 @description('Resource group of audit storage account is deployed')
-param auditrg string = 'Fabric'
+param auditrg string
 
 // Variables
 var suffix = uniqueString(resourceGroup().id)
