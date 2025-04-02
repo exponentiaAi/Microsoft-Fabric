@@ -26,7 +26,7 @@ param skuTier string = 'fabricf2'
 
 @description('The list of administrators for the Fabric Capacity instance.')
 @secure()
-param adminUsers string = 'powerbipro@exponentia.ai'
+param adminUsers string
 
 // Variables
 var suffix = uniqueString(resourceGroup().id)
