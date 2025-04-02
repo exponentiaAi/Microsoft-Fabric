@@ -27,6 +27,6 @@ jobs:
         scope: subscription
         region: centralindia
         subscriptionId: 224a3c65-8eb9-4654-8ba7-ea005536e634
-        template: iac/bicep/main.bicep
+        template: fabric-accelerator/iac/bicep/main.bicep
         # parameters: 'k1=v1 k2=v2 k3=v3'
         failOnStdErr: false
