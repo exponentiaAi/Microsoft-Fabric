@@ -2,15 +2,6 @@
 @description('Location where resources will be deployed. Defaults to resource group location')
 param location string = 'centralindia'
 
-@description('Cost Centre tag that will be applied to all resources in this deployment')
-param cost_centre_tag string = 'CostCentre'
-
-@description('System Owner tag that will be applied to all resources in this deployment')
-param owner_tag string ='SystemOwner'
-
-@description('Subject Matter Expert (SME) tag that will be applied to all resources in this deployment')
-param sme_tag string ='SME'
-
 @description('Audit Storage name')
 param audit_storage_name string = 'fabricgen2datalake'
 
@@ -40,10 +31,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: audit_storage_uniquename
   location: location
   tags: {
-    CostCentre: 'CostCentre123'
-    SystemOwner: 'AdminTeam'
-    SME: 'SME_Team'
-    }
+    Environment: 'Production'
+    Purpose: 'AuditLogs'
+  }
   sku: {name: audit_storage_sku}
   kind:  'StorageV2'
   identity: {type: 'SystemAssigned'}
@@ -63,20 +53,19 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
 }
 
 // Create a Log Analytics Workspace
-resource loganalytics 'Microsoft.OperationalInsights/workspaces@2015-03-20' = {
+resource loganalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: audit_loganalytics_uniquename
   location: location
   tags: {
-    CostCentre: 'CostCentre123'
-    SystemOwner: 'AdminTeam'
-    SME: 'SME_Team'
-    }
+    Environment: 'Production'
+    Purpose: 'AuditLogs'
+  }
   identity: {type: 'SystemAssigned'}
   properties: {
     publicNetworkAccessForIngestion: 'Enabled'
     publicNetworkAccessForQuery: 'Enabled'
     retentionInDays: 30
-    sku: {name: 'pergb2018'}
+    sku: {name: 'perGB2018'}
   }
 }
 
