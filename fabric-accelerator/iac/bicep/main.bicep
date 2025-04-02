@@ -1,4 +1,3 @@
-
 // Scope
 targetScope = 'subscription'
 
@@ -7,7 +6,7 @@ targetScope = 'subscription'
 param dprg string= 'Fabric'
 
 @description('Resource group location')
-param rglocation string = 'Centralindia'
+param rglocation string = 'centralindia'
 
 @description('Cost Centre tag that will be applied to all resources in this deployment')
 param cost_centre_tag string = 'Cost Centre'
@@ -27,7 +26,6 @@ param enable_audit bool = true
 @description('Resource group where audit resources will be deployed if enabled. Resource group will be created if it doesnt exist')
 param auditrg string= 'fabric-logs'
 
-
 // Variables
 var fabric_deployment_name = 'fabric_dataplatform_deployment_${deployment_suffix}'
 var keyvault_deployment_name = 'keyvault_deployment_${deployment_suffix}'
@@ -45,7 +43,7 @@ resource fabric_rg  'Microsoft.Resources/resourceGroups@2020-06-01' = {
   }
 }
 
- // Create audit resource group
+// Create audit resource group
 resource audit_rg  'Microsoft.Resources/resourceGroups@2020-06-01' = if(enable_audit) {
   name: auditrg 
   location: rglocation
@@ -95,10 +93,9 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
   scope: fabric_rg
   params:{
     fabric_name: 'powerbipro'
-    location: fabric_rg.rglocation
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
+    location: fabric_rg.location
+    skuName: 'F2'
+    skuTier: 'fabricf2'
     adminUsers: kv_ref.getSecret('Azure exponentia ai')
   }
 }
@@ -109,20 +106,14 @@ module controldb './modules/sqldb.bicep' = {
   scope: fabric_rg
   params:{
     
-     sqlserver_name: 'fabric-database.${environment().suffixes.sqlServerHostname}'
-     database_name: 'Fabric' 
-     location: fabric_rg.rglocation
-     CostCentre: 'CostCentre123'
-     SystemOwner: 'AdminTeam'
-     SME: 'SME_Team'
-     ad_admin_username:  kv_ref.getSecret('powerbipro@exponentia.ai')
-     ad_admin_sid:  kv_ref.getSecret('a2ee70c0-b5d8-4496-b6ed-2fc0b824155e')  
-     auto_pause_duration: 60
-     database_sku_name: 'GP_S_Gen5_1' 
-     enable_audit: false
-     audit_storage_name: audit_integration.outputs.audit_storage_uniquename
-     auditrg: audit_rg.name
+    sqlserver_name: 'fabric-database.${environment().suffixes.sqlServerHostname}'
+    database_name: 'Fabric' 
+    location: fabric_rg.location
+    CostCentre: 'CostCentre123'
+    SystemOwner: 'AdminTeam'
+    SME: 'SME_Team'
+    ad_admin_username: kv_ref.getSecret('powerbipro@exponentia.ai')
+    ad_admin_sid: kv_ref.getSecret('a2ee70c0-b5d8-4496-b6ed-2fc0b824155e')  
+    auto_pause_duration: 60
   }
 }
-
-
