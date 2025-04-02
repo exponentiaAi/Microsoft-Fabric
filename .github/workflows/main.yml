@@ -18,7 +18,7 @@ jobs:
     #Log into Azure
     - uses: azure/login@v1
       with:
-           creds: '{"clientId":"8d9aea47-f467-4f80-9415-060fb5d980f9","clientSecret":"9fadf330-ef16-4995-bb78-9c3d35477421","subscriptionId":"224a3c65-8eb9-4654-8ba7-ea005536e634","tenantId":"fb33e7e1-6a98-4d5a-bd25-f47acf95078a"}'
+        creds: '{"clientId":"8d9aea47-f467-4f80-9415-060fb5d980f9","clientSecret":"9fadf330-ef16-4995-bb78-9c3d35477421","subscriptionId":"224a3c65-8eb9-4654-8ba7-ea005536e634","tenantId":"fb33e7e1-6a98-4d5a-bd25-f47acf95078a"}'
 
     # Deploy Bicep file
     - name: deploy
