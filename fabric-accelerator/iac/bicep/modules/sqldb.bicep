@@ -126,10 +126,11 @@ resource sqlserver_audit 'Microsoft.Sql/servers/auditingSettings@2022-02-01-prev
     isStorageSecondaryKeyInUse: false
     retentionDays: 90
     state: 'Enabled'
-    storageAccountSubscriptionId: '224a3c65-8eb9-4654-8ba7-ea005536e634'
-    storageEndpoint: 'https://fabricgen2datalake.blob.core.windows.net/'
- }
+    storageAccountSubscriptionId: subscription().subscriptionId
+    storageEndpoint: '${audit_storage_account.properties.primaryEndpoints.blob}'
+  }
 }
+
 //Role Assignment
 @description('This is the built-in Storage Blob Reader role. See https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#contributor')
 resource readerRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
