@@ -1,6 +1,6 @@
 
 // Scope
-targetScope = 'Azure subscription 1'
+targetScope = 'subscription'
 
 // Parameters
 @description('Resource group where Microsoft Fabric capacity will be deployed. Resource group will be created if it doesnt exist')
@@ -61,7 +61,7 @@ module kv './modules/keyvault.bicep' = {
   name: keyvault_deployment_name
   scope: fabric_rg
   params:{
-     location: fabric_rg.rglocation
+     location: fabric_rg.location
      keyvault_name: 'fabric-keyuser'
      cost_centre_tag: cost_centre_tag
      owner_tag: owner_tag
@@ -79,7 +79,7 @@ module audit_integration './modules/audit.bicep' = if(enable_audit) {
   name: audit_deployment_name
   scope: audit_rg
   params:{
-    location: audit_rg.rglocation
+    location: audit_rg.location
     cost_centre_tag: cost_centre_tag
     owner_tag: owner_tag
     sme_tag: sme_tag
@@ -115,8 +115,8 @@ module controldb './modules/sqldb.bicep' = {
      CostCentre: 'CostCentre123'
      SystemOwner: 'AdminTeam'
      SME: 'SME_Team'
-     ad_admin_username:  kv_ref.getSecret('badal.salve@exponentia.ai')
-     ad_admin_sid:  kv_ref.getSecret('8e0c3f69-ed67-4374-bad3-00925cc2a0ea')  
+     ad_admin_username:  kv_ref.getSecret('powerbipro@exponentia.ai')
+     ad_admin_sid:  kv_ref.getSecret('a2ee70c0-b5d8-4496-b6ed-2fc0b824155e')  
      auto_pause_duration: 60
      database_sku_name: 'GP_S_Gen5_1' 
      enable_audit: false
