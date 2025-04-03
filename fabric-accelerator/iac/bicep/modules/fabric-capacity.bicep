@@ -1,9 +1,18 @@
 // Parameters
 @description('The name of the Fabric Capacity.')
-param fabric_name string = 'fabricf2'
+param fabric_name string
 
 @description('The Azure Region to deploy the resources into.')
-param location string = 'centralindia' // Central India
+param location string = resourceGroup().location
+
+@description('Cost Centre tag that will be applied to all resources in this deployment')
+param cost_centre_tag string
+
+@description('System Owner tag that will be applied to all resources in this deployment')
+param owner_tag string
+
+@description('Subject Matter Expert (SME) tag that will be applied to all resources in this deployment')
+param sme_tag string
 
 @description('The SKU name of the Fabric Capacity.')
 @allowed([
@@ -26,7 +35,7 @@ param skuTier string = 'fabricf2'
 
 @description('The list of administrators for the Fabric Capacity instance.')
 @secure()
-param adminUsers string = 'powerbipro@exponentia.ai'
+param adminUsers string
 
 // Variables
 var suffix = uniqueString(resourceGroup().id)
@@ -36,7 +45,11 @@ var fabric_uniquename = '${fabric_name}${suffix}'
 resource fabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' = {
   name: toLower(fabric_uniquename)
   location: location
-  properties: {  
+  tags: {
+    CostCentre: cost_centre_tag
+    Owner: owner_tag
+    SME: sme_tag
+  }
   sku: {
     name: skuName
     tier: skuTier
