@@ -65,6 +65,9 @@ module kv './modules/keyvault.bicep' = {
   params: {
     location: fabric_rg.location
     keyvault_name: 'fabric-keyuser'
+    cost_centre_tag: cost_centre_tag
+    owner_tag: owner_tag
+    sme_tag: sme_tag
   }
 }
 
@@ -95,6 +98,9 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
     skuName: 'F2'
     skuTier: 'fabricf2'
     adminUsers: kv_ref.getSecret('Azure exponentia ai')
+    cost_centre_tag: cost_centre_tag
+    owner_tag: owner_tag
+    sme_tag: sme_tag
   }
 }
 
@@ -106,6 +112,9 @@ module sql_control_db './modules/sqldb.bicep' = {
     sqlserver_name: 'fabric-database'
     database_name: 'Fabric'
     location: fabric_rg.location
+    cost_centre_tag: cost_centre_tag
+    owner_tag: owner_tag
+    sme_tag: sme_tag
     ad_admin_username: kv_ref.getSecret('powerbipro@exponentia.ai')
     ad_admin_sid: kv_ref.getSecret('a2ee70c0-b5d8-4496-b6ed-2fc0b824155e')
     database_sku_name: 'GP_S_Gen5_1'
@@ -113,7 +122,7 @@ module sql_control_db './modules/sqldb.bicep' = {
     enable_purview: false
     enable_audit: true
     purview_resource: {}
-    audit_storage_name: audit_integration.outputs.audit_storage_uniquename
-    auditrg: audit_rg.name
+    audit_storage_name: enable_audit?audit_integration.outputs.audit_storage_uniquename:''
+    auditrg: enable_audit?audit_rg.name:''
   }
 }
