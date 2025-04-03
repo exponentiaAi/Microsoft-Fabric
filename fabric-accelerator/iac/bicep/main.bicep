@@ -12,12 +12,12 @@ param rglocation string = 'centralindia'
 param cost_centre_tag string = 'Cost Centre'
 
 @description('System Owner tag that will be applied to all resources in this deployment')
-param owner_tag string = 'System Owner'
+param owner_tag string = 'AdminTeam'
 
 @description('Subject Matter EXpert (SME) tag that will be applied to all resources in this deployment')
 param sme_tag string = 'SME'
 
-@description('Timestamp that will be appendedto the deployment name')
+@description('Timestamp that will be appended to the deployment name')
 param deployment_suffix string = utcNow()
 
 @description('Flag to indicate whether auditing of data platform resources should be enabled')
@@ -25,6 +25,10 @@ param enable_audit bool = true
 
 @description('Resource group where audit resources will be deployed if enabled. Resource group will be created if it doesnt exist')
 param auditrg string = 'fabric-logs'
+
+// New Parameter for Audit Storage SKU
+@description('SKU for the audit storage')
+param audit_storage_sku string = 'Standard_LRS'
 
 // Variables
 var fabric_deployment_name = 'fabric_dataplatform_deployment_${deployment_suffix}'
@@ -61,9 +65,6 @@ module kv './modules/keyvault.bicep' = {
   params: {
     location: fabric_rg.location
     keyvault_name: 'fabric-keyuser'
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
   }
 }
 
@@ -72,22 +73,19 @@ resource kv_ref 'Microsoft.KeyVault/vaults@2016-10-01' existing = {
   scope: fabric_rg
 }
 
-//Enable auditing for data platform resources
+// Enable auditing for data platform resources
 module audit_integration './modules/audit.bicep' = if(enable_audit) {
   name: audit_deployment_name
   scope: audit_rg
   params: {
     location: audit_rg.location
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
     audit_storage_name: 'fabricgen2datalake'
-    audit_storage_sku: 'Standard_LRS'    
+    audit_storage_sku: audit_storage_sku
     audit_loganalytics_name: 'fabric-logs'
   }
 }
 
-//Deploy Microsoft Fabric Capacity
+// Deploy Microsoft Fabric Capacity
 module fabric_capacity './modules/fabric-capacity.bicep' = {
   name: fabric_deployment_name
   scope: fabric_rg
@@ -97,9 +95,6 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
     skuName: 'F2'
     skuTier: 'fabricf2'
     adminUsers: kv_ref.getSecret('Azure exponentia ai')
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
   }
 }
 
@@ -111,9 +106,6 @@ module sql_control_db './modules/sqldb.bicep' = {
     sqlserver_name: 'fabric-database'
     database_name: 'Fabric'
     location: fabric_rg.location
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
     ad_admin_username: kv_ref.getSecret('powerbipro@exponentia.ai')
     ad_admin_sid: kv_ref.getSecret('a2ee70c0-b5d8-4496-b6ed-2fc0b824155e')
     database_sku_name: 'GP_S_Gen5_1'
