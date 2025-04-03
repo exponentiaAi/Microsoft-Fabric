@@ -94,11 +94,8 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
   params: {
     fabric_name: 'powerbipro'
     location: fabric_rg.location
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
     skuName: 'F2'
-    skuTier: 'Fabric'
+    skuTier: 'fabricf2'
     adminUsers: kv_ref.getSecret('Azure exponentia ai')
   }
 }
@@ -125,5 +122,3 @@ module sql_control_db './modules/sqldb.bicep' = {
     auditrg: audit_rg.name
   }
 }
-
-

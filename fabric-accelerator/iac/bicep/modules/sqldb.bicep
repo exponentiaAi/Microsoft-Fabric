@@ -34,7 +34,7 @@ param auto_pause_duration int = 60
 param enable_purview bool = false
 
 @description('Flag to indicate whether to enable audit logging of SQL Server')
-param enable_audit bool = false
+param enable_audit bool = true
 
 @description('Resource Name of new or existing Purview Account. Specify a resource name if create_purview=true or enable_purview=true')
 param purview_resource object = {}
