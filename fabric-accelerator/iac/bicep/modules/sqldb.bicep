@@ -106,7 +106,7 @@ resource audit_storage_account 'Microsoft.Storage/storageAccounts@2023-01-01' ex
 
 module storage_permissions './storage-permissions.bicep' = if(enable_audit) {
   name: 'storage_permissions'
-  scope: subscription()
+  scope: resourceGroup(auditrg)
   params:{
     storage_name: audit_storage_name
     storage_rg: auditrg
