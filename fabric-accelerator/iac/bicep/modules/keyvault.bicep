@@ -1,15 +1,15 @@
 // Parameters
 @description('Location where resources will be deployed. Defaults to resource group location')
-param location string = 'centralindia'
+param location string = resourceGroup().location
 
 @description('Cost Centre tag that will be applied to all resources in this deployment')
-param cost_centre_tag string = 'CostCentre'
+param cost_centre_tag string
 
 @description('System Owner tag that will be applied to all resources in this deployment')
-param owner_tag string = 'SystemOwner'
+param owner_tag string
 
 @description('Subject Matter Expert (SME) tag that will be applied to all resources in this deployment')
-param sme_tag string = 'SME'
+param sme_tag string
 
 @description('Key Vault name')
 param keyvault_name string = 'fabric-keyuser'
@@ -28,8 +28,8 @@ var suffix = uniqueString(resourceGroup().id)
 var keyvault_uniquename = '${keyvault_name}-${suffix}'
 
 // Create Key Vault
-resource keyvault 'Microsoft.KeyVault/vaults@2016-10-01' ={
-  name: keyvault_name
+resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
+  name: keyvault_uniquename
   location: location
   tags: {
     CostCentre: cost_centre_tag

@@ -102,7 +102,7 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
 
 // Deploy SQL control DB
 module sql_control_db './modules/sqldb.bicep' = {
-  name: 'sql_control_db'
+  name: controldb_deployment_name
   scope: fabric_rg
   params: {
     sqlserver_name: 'fabric-database'
