@@ -12,10 +12,10 @@ param rglocation string = 'centralindia'
 param cost_centre_tag string = 'Cost Centre'
 
 @description('System Owner tag that will be applied to all resources in this deployment')
-param owner_tag string = 'powerbipro@exponentia.ai'
+param owner_tag string = 'System Owner'
 
 @description('Subject Matter EXpert (SME) tag that will be applied to all resources in this deployment')
-param sme_tag string = 'powerbipro@exponentia.ai'
+param sme_tag string = 'SME'
 
 @description('Timestamp that will be appendedto the deployment name')
 param deployment_suffix string = utcNow()
