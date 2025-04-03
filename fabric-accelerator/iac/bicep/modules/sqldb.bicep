@@ -104,10 +104,10 @@ resource audit_storage_account 'Microsoft.Storage/storageAccounts@2023-01-01' ex
   scope: resourceGroup(auditrg)
 }
 
-module storage_permissions './storage-permissions.bicep' {
+module storage_permissions './storage-permissions.bicep' = if(enable_audit) {
   name: 'storage_permissions'
-  scope: resourceGroup(auditrg)
-  params: {
+  scope: subscription()
+  params:{
     storage_name: audit_storage_name
     storage_rg: auditrg
     principalId: sqlserver.identity.principalId
