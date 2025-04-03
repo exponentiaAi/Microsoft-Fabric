@@ -97,6 +97,9 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
     skuName: 'F2'
     skuTier: 'fabricf2'
     adminUsers: kv_ref.getSecret('Azure exponentia ai')
+    cost_centre_tag: cost_centre_tag
+    owner_tag: owner_tag
+    sme_tag: sme_tag
   }
 }
 
