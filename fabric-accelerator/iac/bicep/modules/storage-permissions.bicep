@@ -21,6 +21,9 @@ resource storage_account 'Microsoft.Storage/storageAccounts@2022-05-01' existing
   scope: resourceGroup(storage_rg)
 }
 
+// Reference the storage account to avoid linter warnings
+var _unusedStorageAccount = storage_account.name
+
 //In-built role definition for storage account
 @description('This is the built-in Storage Blob Contributor role. See https://docs.microsoft.com/azure/role-based-access-control/built-in-roles')
 resource sbdcRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
