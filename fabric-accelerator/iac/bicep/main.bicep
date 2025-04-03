@@ -61,9 +61,9 @@ module kv './modules/keyvault.bicep' = {
   params: {
     location: fabric_rg.location
     keyvault_name: 'fabric-keyuser'
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
+    CostCentre: cost_centre_tag
+    Owner: owner_tag
+    SME: sme_tag
   }
 }
 
@@ -78,9 +78,9 @@ module audit_integration './modules/audit.bicep' = if(enable_audit) {
   scope: audit_rg
   params: {
     location: audit_rg.location
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
+    CostCentre: cost_centre_tag
+    Owner: owner_tag
+    SME: sme_tag
     audit_storage_name: 'fabricgen2datalake'
     audit_storage_sku: 'Standard_LRS'    
     audit_loganalytics_name: 'fabric-logs'
@@ -97,9 +97,9 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
     skuName: 'F2'
     skuTier: 'fabricf2'
     adminUsers: kv_ref.getSecret('Azure exponentia ai')
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
+    CostCentre: cost_centre_tag
+    Owner: owner_tag
+    SME: sme_tag
   }
 }
 
@@ -111,9 +111,9 @@ module sql_control_db './modules/sqldb.bicep' = {
     sqlserver_name: 'fabric-database'
     database_name: 'Fabric'
     location: fabric_rg.location
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
+    CostCentre: cost_centre_tag
+    Owner: owner_tag
+    SME: sme_tag
     ad_admin_username: kv_ref.getSecret('powerbipro@exponentia.ai')
     ad_admin_sid: kv_ref.getSecret('a2ee70c0-b5d8-4496-b6ed-2fc0b824155e')
     database_sku_name: 'GP_S_Gen5_1'
