@@ -25,7 +25,9 @@ param keyvault_name string = 'fabric-keyuser'
 
 // Variables
 var suffix = uniqueString(resourceGroup().id)
-var keyvault_uniquename = '${keyvault_name}${suffix}'
+// var keyvault_uniquename = '${keyvault_name}${suffix}'
+var truncatedSuffix = take(suffix, 10)  // Limit the suffix to 10 characters
+var keyvault_uniquename = '${keyvault_name}${truncatedSuffix}'
 
 // Create Key Vault
 resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
