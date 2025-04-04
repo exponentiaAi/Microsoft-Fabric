@@ -1,4 +1,4 @@
-targetScope = 'subscription'
+//targetScope = 'subscription'
 
 @description('Resource name storage account to which permissions are to be granted')
 param storage_name string = 'fabricgen2datalake'
