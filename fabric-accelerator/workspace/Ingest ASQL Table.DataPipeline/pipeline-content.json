@@ -52,7 +52,7 @@
           }
         },
         "externalReferences": {
-          "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+          "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
         },
         "policy": {
           "timeout": "0.12:00:00",
@@ -105,7 +105,7 @@
               },
               "schema": [],
               "externalReferences": {
-                "connection": "a0a57e51-5032-4e46-b0f0-493c9d2f51c9"
+                "connection": "59924f8d-5aef-4c27-adf0-0abfb85945d0"
               },
               "annotations": []
             }
@@ -142,7 +142,7 @@
                   "type": "Lakehouse",
                   "typeProperties": {
                     "artifactId": "1355e38b-d635-45a7-9d21-8f02933bc81f",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "workspaceId": "ff86597a-b979-43a6-96a6-6784918d1e48",
                     "rootFolder": "Files"
                   },
                   "annotations": []
@@ -197,7 +197,7 @@
             },
             "schema": [],
             "externalReferences": {
-              "connection": "a0a57e51-5032-4e46-b0f0-493c9d2f51c9"
+              "connection": "59924f8d-5aef-4c27-adf0-0abfb85945d0"
             },
             "annotations": []
           }
@@ -274,7 +274,7 @@
           }
         },
         "externalReferences": {
-          "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+          "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
         },
         "policy": {
           "timeout": "0.12:00:00",
@@ -320,7 +320,7 @@
           }
         },
         "externalReferences": {
-          "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+          "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
         },
         "policy": {
           "timeout": "0.12:00:00",
@@ -364,7 +364,7 @@
             },
             "schema": [],
             "externalReferences": {
-              "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+              "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
             },
             "annotations": []
           },
@@ -565,7 +565,7 @@
                 }
               },
               "externalReferences": {
-                "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+                "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
               },
               "policy": {
                 "timeout": "0.12:00:00",
@@ -614,7 +614,7 @@
             },
             "schema": [],
             "externalReferences": {
-              "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+              "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
             },
             "annotations": []
           },
@@ -865,7 +865,7 @@
                 }
               },
               "externalReferences": {
-                "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+                "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
               },
               "policy": {
                 "timeout": "0.12:00:00",
@@ -923,7 +923,7 @@
           }
         },
         "externalReferences": {
-          "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+          "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
         },
         "policy": {
           "timeout": "0.12:00:00",

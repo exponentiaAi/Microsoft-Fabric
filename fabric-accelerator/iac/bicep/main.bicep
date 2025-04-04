@@ -89,21 +89,31 @@ module audit_integration './modules/audit.bicep' = if(enable_audit) {
 }
 
 // Deploy Microsoft Fabric Capacity
-module fabric_capacity './modules/fabric-capacity.bicep' = {
-  name: fabric_deployment_name
-  scope: fabric_rg
-  params: {
-    fabric_name: 'powerbipro'
-    location: fabric_rg.location
-    skuName: 'F2'
-    skuTier: 'fabricf2'
-    // adminUsers: kv_ref.getSecret('fabric-capacity-admin-username')
-    adminUsers: 'powerbipro@exponentia.ai'
-    cost_centre_tag: cost_centre_tag
-    owner_tag: owner_tag
-    sme_tag: sme_tag
-  }
+// module fabric_capacity './modules/fabric-capacity.bicep' = {
+//   name: fabric_deployment_name
+//   scope: fabric_rg
+//   params: {
+//     fabric_name: 'powerbipro'
+//     location: fabric_rg.location
+//     skuName: 'F2'
+//     skuTier: 'fabricf2'
+//     // adminUsers: kv_ref.getSecret('fabric-capacity-admin-username')
+//     adminUsers: 'powerbipro@exponentia.ai'
+//     cost_centre_tag: cost_centre_tag
+//     owner_tag: owner_tag
+//     sme_tag: sme_tag
+//   }
+// }
+
+// Reference existing Microsoft Fabric Capacity
+resource existingFabricCapacity 'Microsoft.Fabric/capacities@2023-11-01' existing = {
+  name: 'fabricf2' // Use the name of your existing capacity
+  scope: resourceGroup('Fabric') // Ensure the scope is set to the correct resource group
 }
+
+// Use the existing capacity in your deployment
+output existingCapacityId string = existingFabricCapacity.id
+output existingCapacityName string = existingFabricCapacity.name
 
 // Deploy SQL control DB
 module sql_control_db './modules/sqldb.bicep' = {

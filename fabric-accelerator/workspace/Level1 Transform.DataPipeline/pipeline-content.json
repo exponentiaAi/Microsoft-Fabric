@@ -67,7 +67,7 @@
           }
         },
         "externalReferences": {
-          "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+          "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
         }
       },
       {
@@ -247,7 +247,7 @@
             "value": "@replace(replace(pipeline().parameters.ComputeName,'-','_'),' ','')",
             "type": "Expression"
           },
-          "capacityId": "e4eb626a-4082-4143-983d-6fc9284b74cd"
+          "capacityId": "0756325A-154B-4726-A670-83E203C4468F"
         }
       },
       {
@@ -328,7 +328,7 @@
           }
         },
         "externalReferences": {
-          "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+          "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
         }
       },
       {
@@ -461,7 +461,7 @@
               "database": "controlDB"
             },
             "externalReferences": {
-              "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+              "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
             }
           }
         }
@@ -712,7 +712,7 @@
                 }
               },
               "externalReferences": {
-                "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+                "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
               }
             }
           ]
@@ -768,7 +768,7 @@
           }
         },
         "externalReferences": {
-          "connection": "91ecdff4-3ab7-4bbb-b6e0-682881c0540d"
+          "connection": "53f6de9f-960f-4626-8eea-95badf1e9689"
         }
       },
       {
