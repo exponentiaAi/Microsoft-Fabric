@@ -97,7 +97,8 @@ module fabric_capacity './modules/fabric-capacity.bicep' = {
     location: fabric_rg.location
     skuName: 'F2'
     skuTier: 'fabricf2'
-    adminUsers: kv_ref.getSecret('fabric-capacity-admin-username')
+    // adminUsers: kv_ref.getSecret('fabric-capacity-admin-username')
+    adminUsers: 'powerbipro@exponentia.ai'
     cost_centre_tag: cost_centre_tag
     owner_tag: owner_tag
     sme_tag: sme_tag
@@ -117,8 +118,10 @@ module sql_control_db './modules/sqldb.bicep' = {
     sme_tag: sme_tag
     // ad_admin_username: kv_ref.getSecret('powerbipro@exponentia.ai')
     // ad_admin_sid: kv_ref.getSecret('a2ee70c0-b5d8-4496-b6ed-2fc0b824155e')
-    ad_admin_username:  kv_ref.getSecret('sqlserver-ad-admin-username')
-    ad_admin_sid:  kv_ref.getSecret('sqlserver-ad-admin-sid')  
+    // ad_admin_username:  kv_ref.getSecret('sqlserver-ad-admin-username')
+    // ad_admin_sid:  kv_ref.getSecret('sqlserver-ad-admin-sid')
+    ad_admin_username: 'powerbipro@exponentia.ai'
+    ad_admin_sid: 'a2ee70c0-b5d8-4496-b6ed-2fc0b824155e'
     database_sku_name: 'GP_S_Gen5_1'
     auto_pause_duration: 60
     enable_purview: false
