@@ -1,4 +1,4 @@
-targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
 @description('Resource name storage account to which permissions are to be granted')
 param storage_name string = 'fabricgen2datalake'
@@ -27,20 +27,20 @@ var _unusedStorageAccount = storage_account.name
 //In-built role definition for storage account
 @description('This is the built-in Storage Blob Contributor role. See https://docs.microsoft.com/azure/role-based-access-control/built-in-roles')
 resource sbdcRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: resourceGroup()
+  scope: subscription()
   name: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
 }
 
 @description('This is the built-in Storage Blob Reader role. See https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#contributor')
 resource sbdrRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: resourceGroup()
+  scope: subscription()
   name: '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1'
 }
 
 //Grant Storage Blob Data Contributor role to resource
 resource grant_sbdc_role 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (grant_contributor) {
   name: guid(subscription().subscriptionId, principalId, sbdcRoleDefinition.id)
-  scope: resourceGroup()
+  scope: subscription()
   properties: {
     principalType: 'ServicePrincipal'
     principalId: principalId
@@ -51,7 +51,7 @@ resource grant_sbdc_role 'Microsoft.Authorization/roleAssignments@2020-04-01-pre
 //Grant Storage Blob Data Reader role to resource
 resource grant_sbdr_role 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (grant_reader) {
   name: guid(subscription().subscriptionId, principalId, sbdrRoleDefinition.id)
-  scope: resourceGroup() //needs to be uncommented when this is supported
+  scope: subscription() //needs to be uncommented when this is supported
   properties: {
     principalType: 'ServicePrincipal'
     principalId: principalId
