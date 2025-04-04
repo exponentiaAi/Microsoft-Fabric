@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Ingest OneLake Lakehouse Table"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8ef2935e-2e2b-8a61-45e7-5857422b902b"
+  }
+}
