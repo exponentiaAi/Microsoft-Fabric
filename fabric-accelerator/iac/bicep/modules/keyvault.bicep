@@ -25,7 +25,7 @@ param enable_purview bool = true
 
 // Variables
 var suffix = uniqueString(resourceGroup().id)
-var keyvault_uniquename = '${keyvault_name}-${suffix}'
+var keyvault_uniquename = '${keyvault_name}${suffix}'
 
 // Create Key Vault
 resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
