@@ -14,14 +14,14 @@ param sme_tag string
 @description('Key Vault name')
 param keyvault_name string = 'fabric-keyuser'
 
-@description('Purview Account name')
-param purview_account_name string = 'fabric-purview'
+// @description('Purview Account name')
+// param purview_account_name string = 'fabric-purview'
 
-@description('Resource group of Purview Account')
-param purviewrg string = 'fabric-purview'
+// @description('Resource group of Purview Account')
+// param purviewrg string = 'fabric-purview'
 
-@description('Flag to indicate whether to enable integration of data platform resources with either an existing or new Purview resource')
-param enable_purview bool = true
+// @description('Flag to indicate whether to enable integration of data platform resources with either an existing or new Purview resource')
+// param enable_purview bool = false
 
 // Variables
 var suffix = uniqueString(resourceGroup().id)
@@ -63,22 +63,22 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
 }
 
 // Create Key Vault Access Policies for Purview
-resource existing_purview_account 'Microsoft.Purview/accounts@2021-07-01' existing = if(enable_purview) {
-  name: purview_account_name
-  scope: resourceGroup(purviewrg)
-}
+// resource existing_purview_account 'Microsoft.Purview/accounts@2021-07-01' existing = if(enable_purview) {
+//   name: purview_account_name
+//   scope: resourceGroup(purviewrg)
+// }
 
-resource this_keyvault_accesspolicy 'Microsoft.KeyVault/vaults/accessPolicies@2022-07-01' = if(enable_purview) {
-  name: 'add'
-  parent: keyvault
-  properties: {
-    accessPolicies: [
-      { tenantId: subscription().tenantId
-        objectId: existing_purview_account.identity.principalId
-        permissions: { secrets: ['list','get']}
-      }
-    ]
-  }
-}
+// resource this_keyvault_accesspolicy 'Microsoft.KeyVault/vaults/accessPolicies@2022-07-01' = if(enable_purview) {
+//   name: 'add'
+//   parent: keyvault
+//   properties: {
+//     accessPolicies: [
+//       { tenantId: subscription().tenantId
+//         objectId: existing_purview_account.identity.principalId
+//         permissions: { secrets: ['list','get']}
+//       }
+//     ]
+//   }
+// }
 
 output keyvault_name string = keyvault.name
