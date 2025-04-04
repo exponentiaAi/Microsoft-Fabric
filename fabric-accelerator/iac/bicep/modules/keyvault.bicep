@@ -57,7 +57,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
         permissions: {secrets: ['list','get','set','Delete','Recover','Backup','Restore']}
       }
       { tenantId: subscription().tenantId
-        objectId: 'a2ee70c0-b5d8-4496-b6ed-2fc0b824155e' //replace by powerbipro objectId
+        objectId: 'ae32d61c-a541-40bf-8441-c2af1e4f5521'//replace by powerbipro objectId
         permissions: {secrets: ['list','get','set','Delete','Recover','Backup','Restore']}
       }
     ]
